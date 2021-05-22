@@ -19,7 +19,6 @@ CMyString::CMyString(const char* strParam)
 
 
 CMyString::operator char* (void) const {
-	cout << "변환함수" << endl;
 	return m_pszData;
 }
 
@@ -58,6 +57,10 @@ int CMyString::SetString(const char* pszParam)
 	for (int i = 0; i <= len; i++) {
 		m_pszData[i] = pszParam[i];
 	}
+
+	OnSetString(m_pszData, m_nLength); // virtual 을 껴넣으면서 미래의 개발자가 개입할 수 있게된다.
+
+	return m_nLength;
 }
 
 const char* CMyString::GetString(void) const
@@ -143,4 +146,8 @@ int CMyString::operator!=(const CMyString& rhs) {
 		if (strcmp(m_pszData, rhs.m_pszData) == 0)
 			return 0;
 	return 1;
+}
+
+void CMyString::OnSetString(char* pszData, int nLength) {
+
 }

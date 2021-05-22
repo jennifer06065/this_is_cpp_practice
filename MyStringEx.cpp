@@ -9,29 +9,13 @@ int CMyStringEx::Find(const char* pszParam) {
 	int pszlen = GetLength();
 	char* pszData = new char[pszlen];
 	strcpy(pszData, GetString());
-	/*
-	bool flag;
-	for (int i = 0; i < pszlen; i++) {
-		flag = 0;
-		for (int j = 0; pszParam[j] != '\0'; j++) {
-			if (i + j >= pszlen) {
-				return -1;
-			}
-			if (pszParam[j] == pszData[i+j]) {
-				continue;
-			}
-			else {
-				flag = 1;
-				break;
-			}
-		}
-		if (flag == 1) continue;
-		else return i;
-	}
-	return -1;
-	*/
 
 	char* temp = strstr(pszData, pszParam);
 	if (temp == NULL) return -1;
 	else return temp - pszData;
+}
+
+void CMyStringEx::OnSetString(char* pszData, int nLength) {
+	if (strcmp(pszData, "¸Û¸ÛÀÌ¾Æµé") == 0)
+		strcpy_s(pszData, sizeof(char) * (nLength + 1), "*ÂøÇÑ¾Æµé*");
 }
